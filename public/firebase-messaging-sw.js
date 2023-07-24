@@ -23,7 +23,6 @@ const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
  
-
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     title: payload.notification.title,

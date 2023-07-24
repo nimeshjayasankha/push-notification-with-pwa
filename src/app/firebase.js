@@ -11,14 +11,16 @@ var firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const messaging = getMessaging(firebaseApp);
+// const messaging = getMessaging(firebaseApp);
+const messaging = typeof window !== "undefined" ? getMessaging(firebaseApp) : null;
 
-export const fetchToken = (setToken: any) => {
+// const messaging = firebaseApp.messaging();
+export const fetchToken = (setToken) => {
   return getToken(messaging, {
     vapidKey:
       "BP93C7WuTic-qeOk0s-BGxZBHXkYDmGEtvMoCuRJzi7PuOLLktk4Y0Pw1ym4u8bnO2GZ9rvcPP_aYB2iZw1yHag",
   })
-    .then((currentToken: any) => {
+    .then((currentToken) => {
       if (currentToken) {
         console.log("current token for client: ", currentToken);
         setToken(currentToken);
@@ -40,7 +42,7 @@ export const fetchToken = (setToken: any) => {
 
 export const onMessageListener = () =>
   new Promise((resolve) => {
-    onMessage(messaging, (payload: any) => {
+    onMessage(messaging, (payload) => {
       resolve(payload);
     });
   });
