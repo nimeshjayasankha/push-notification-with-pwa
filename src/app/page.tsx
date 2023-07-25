@@ -7,15 +7,16 @@ export default function Home() {
   const [token, setToken] = useState("");
   const [notification, setNotification] = useState({ title: "", body: "" });
 
-  useEffect(()=>{
+  useEffect(() => {
     onMessageListener()
-    .then((payload: any) => {
-      setNotification({
-        title: payload.notification.title,
-        body: payload.notification.body,
-      });
-    })
-    .catch((err) => console.log("failed: ", err));
+      .then((payload: any) => {
+        alert(payload.notification.title);
+        setNotification({
+          title: payload.notification.title,
+          body: payload.notification.body,
+        });
+      })
+      .catch((err) => console.log("failed: ", err));
   })
 
   const askNotificationPermission = async () => {
