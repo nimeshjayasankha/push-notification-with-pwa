@@ -18,9 +18,14 @@ export default function Home() {
     //     });
     //   })
     //   .catch((err) => console.log("failed: ", err));
-    self.addEventListener("push", function (e: any) {
-      setData(e);
-    });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('message', (event) => {
+        setNotification({
+          title: event.data.notification.title,
+          body: event.data.notification.body,
+        });
+      });
+    }
   })
 
 
