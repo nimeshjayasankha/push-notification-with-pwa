@@ -21,6 +21,7 @@ export default function Home() {
     //   .catch((err) => console.log("failed: ", err));
 
     if ('Notification' in window) {
+      alert(Notification.permission)
       if (Notification.permission === 'granted') {
         // Create and display the notification
         var notification = new Notification('Title', { 'body': 'ssss' });
