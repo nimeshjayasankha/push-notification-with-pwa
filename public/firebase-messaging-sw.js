@@ -30,5 +30,20 @@ messaging.onBackgroundMessage(function (payload) {
   };
   
   console.log("Received background message ", payload);
-  // self.registration.showNotification(notificationTitle, notificationOptions);
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+
+self.addEventListener('push', (event) => {
+  if (event.data) {
+    const data = event.data.json();
+    const title = data.title || 'Notification';
+    const options = {
+      body: data.body || '',
+      icon: data.icon || '/path/to/icon.png',
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+  }
+});
+

@@ -19,15 +19,23 @@ export default function Home() {
     //     });
     //   })
     //   .catch((err) => console.log("failed: ", err));
-    alert('Notification' in window)
-    if ('Notification' in window) {
-      
-      if (Notification.permission === 'granted') {
-        // Create and display the notification
-        var notification = new Notification('Title', { 'body': 'ssss' });
-      }
+  
+    if ('serviceWorker' in navigator && 'firebase-messaging-sw.js' in window) {
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.pushManager
+          .subscribe({
+            userVisibleOnly: true,
+          })
+          .then((subscription) => {
+            // Send the subscription information to your server
+            // Your server should store this information to send future notifications
+          })
+          .catch((error) => {
+            console.error('Error subscribing to push notifications:', error);
+          });
+      });
     }
-
+    
 
     navigator.serviceWorker.addEventListener('message', (event) => {
       console.log(11111)
