@@ -21,29 +21,25 @@ firebase.initializeApp(firebaseConfig);
 // Retrieve firebase messaging
 const messaging = firebase.messaging();
 
-// messaging.onBackgroundMessage(function (payload) {
-
-//   const notificationTitle = payload.notification.title;
-//   const notificationOptions = {
-//     title: payload.notification.title,
-//     body: payload.notification.body,
-//   };
-
-//   console.log("Received background message ", payload);
-//   self.registration.showNotification(notificationTitle, notificationOptions);
-// });
-
-
 self.addEventListener('push', (event) => {
-  console.log('event messaging',messaging)
-  console.log('event data',event)
 
-  if (event.data) {
+  let payload = {};
+  try {
+    payload = event.data.json();
+  } catch (err) {
+    payload = {
+      title: 'Notification',
+      body: event.data.text(),
+      icon: '/path/to/icon.png',
+    };
+  }
 
-    const data = event.data.json();
-    const title = event.data.title || 'Notification App';
+  if (payload.data) {
+
+    const { title, body, icon } = payload.data;
+
     const options = {
-      body: event.data.title || 'new body goes here'
+      body: body
     };
 
     event.waitUntil(self.registration.showNotification(title, options));
