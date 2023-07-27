@@ -19,22 +19,22 @@ export default function Home() {
       })
       .catch((err) => console.log("failed: ", err));
 
-    // if ('serviceWorker' in navigator && 'firebase-messaging-sw.js' in window) {
-    //   navigator.serviceWorker.ready.then((registration) => {
-    //     registration.pushManager
-    //       .subscribe({
-    //         userVisibleOnly: true,
-    //       })
-    //       .then((subscription) => {
-    //         console.log(subscription)
-    //         // Send the subscription information to your server
-    //         // Your server should store this information to send future notifications
-    //       })
-    //       .catch((error) => {
-    //         console.error('Error subscribing to push notifications:', error);
-    //       });
-    //   });
-    // }
+    if ('serviceWorker' in navigator && 'firebase-messaging-sw.js' in window) {
+      navigator.serviceWorker.ready.then((registration) => {
+        registration.pushManager
+          .subscribe({
+            userVisibleOnly: true,
+          })
+          .then((subscription) => {
+            alert(subscription)
+            // Send the subscription information to your server
+            // Your server should store this information to send future notifications
+          })
+          .catch((error) => {
+            console.error('Error subscribing to push notifications:', error);
+          });
+      });
+    }
 
   })
 
