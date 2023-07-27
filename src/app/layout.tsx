@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -13,6 +14,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/firebase-messaging-sw.js", {
+          updateViaCache: "none",
+        })
+        .catch((err) => console.error("Error during service worker registration:", err));
+    }
+  }, []);
   return (
     <html lang="en">
       <head>
