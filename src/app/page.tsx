@@ -19,15 +19,14 @@ export default function Home() {
         });
       })
       .catch((err) => console.log("failed: ", err));
-    if ('serviceWorker' in navigator) {
-      alert(2)
+    
       navigator.serviceWorker.addEventListener('message', (event) => {
         setNotification({
           title: event.data.notification.title,
           body: event.data.notification.body,
         });
       });
-    }
+    
   })
 
 
