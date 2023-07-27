@@ -22,27 +22,26 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 // messaging.onBackgroundMessage(function (payload) {
- 
+
 //   const notificationTitle = payload.notification.title;
 //   const notificationOptions = {
 //     title: payload.notification.title,
 //     body: payload.notification.body,
 //   };
-  
+
 //   console.log("Received background message ", payload);
 //   self.registration.showNotification(notificationTitle, notificationOptions);
 // });
 
 
 self.addEventListener('push', (event) => {
-  console.log('event',event)
+  // console.log('event data',messaging)
   if (event.data) {
-   
+
     const data = event.data.json();
-    const title = data.title || 'Notification';
+    const title = event.data.title || 'Notification App';
     const options = {
-      body: data.body || '',
-      icon: data.icon || '/path/to/icon.png',
+      body: event.data.title || 'new body goes here'
     };
 
     event.waitUntil(self.registration.showNotification(title, options));

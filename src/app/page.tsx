@@ -13,8 +13,8 @@ export default function Home() {
     onMessageListener()
       .then((payload: any) => {
         setNotification({
-          title: payload.notification.title,
-          body: payload.notification.body,
+          title: payload.data.title,
+          body: payload.data.body,
         });
       })
       .catch((err) => console.log("failed: ", err));
@@ -26,7 +26,7 @@ export default function Home() {
             userVisibleOnly: true,
           })
           .then((subscription) => {
-           
+            console.log(subscription)
             // Send the subscription information to your server
             // Your server should store this information to send future notifications
           })
