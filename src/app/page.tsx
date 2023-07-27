@@ -6,18 +6,24 @@ import styles from "./page.module.css";
 export default function Home() {
   const [token, setToken] = useState("");
   const [notification, setNotification] = useState({ title: "", body: "" });
+  const [data, setData] = useState('');
+
 
   useEffect(() => {
-    onMessageListener()
-      .then((payload: any) => {
-        alert(payload.notification.title);
-        setNotification({
-          title: payload.notification.title,
-          body: payload.notification.body,
-        });
-      })
-      .catch((err) => console.log("failed: ", err));
+    // onMessageListener()
+    //   .then((payload: any) => {
+    //     setNotification({
+    //       title: payload.notification.title,
+    //       body: payload.notification.body,
+    //     });
+    //   })
+    //   .catch((err) => console.log("failed: ", err));
+    self.addEventListener("push", function (e: any) {
+      setData(e);
+    });
   })
+
+
 
   const askNotificationPermission = async () => {
     try {
@@ -51,6 +57,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <p>forground {JSON.stringify(notification)}</p>
+      <p>{data}</p>
 
       <textarea value={token} onChange={() => ""} rows={10} cols={200}></textarea>
       <button onClick={handleNotificationPermission}>
