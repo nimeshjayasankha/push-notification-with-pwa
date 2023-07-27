@@ -19,27 +19,27 @@ export default function Home() {
     //     });
     //   })
     //   .catch((err) => console.log("failed: ", err));
-    
-      navigator.serviceWorker.addEventListener('message', (event) => {
-        console.log(11111)
-        setNotification({
-          title: event.data.notification.title,
-          body: event.data.notification.body,
-        });
-        if ('Notification' in window && Notification.permission === 'granted' && event) {
-          var notification = new Notification(event.data.notification.title, {
-            body: event.data.notification.body
-          });
-        
-          // You can also handle click events on the notification.
-          notification.onclick = function () {
-            // Code to run when the user clicks on the notification.
-          };
-        }
+
+    let title = "JavaScript Jeep";
+    let icon = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
+    let body = "Message to be displayed";
+    var notification = new Notification('Title', { body, icon });
+    notification.onclick = () => {
+      notification.close();
+      window.parent.focus();
+    }
+
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      console.log(11111)
+      setNotification({
+        title: event.data.notification.title,
+        body: event.data.notification.body,
       });
 
-    
-    
+    });
+
+
+
   })
 
 
