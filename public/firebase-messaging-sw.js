@@ -37,7 +37,7 @@ self.addEventListener('push', (event) => {
   if (payload.data) {
 
     const { title, body, icon } = payload.data;
-
+    console.log( title, body)
     const options = {
       body: body
     };
