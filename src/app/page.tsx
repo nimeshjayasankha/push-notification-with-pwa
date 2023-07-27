@@ -26,7 +26,7 @@ export default function Home() {
             userVisibleOnly: true,
           })
           .then((subscription) => {
-            alert(subscription)
+           
             // Send the subscription information to your server
             // Your server should store this information to send future notifications
           })
