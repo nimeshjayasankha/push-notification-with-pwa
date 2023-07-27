@@ -20,14 +20,13 @@ export default function Home() {
     //   })
     //   .catch((err) => console.log("failed: ", err));
 
-    let title = "JavaScript Jeep";
-    let icon = 'https://homepages.cae.wisc.edu/~ece533/images/airplane.png';
-    let body = "Message to be displayed";
-    var notification = new Notification('Title', { body, icon });
-    notification.onclick = () => {
-      notification.close();
-      window.parent.focus();
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        // Create and display the notification
+        var notification = new Notification('Title', { 'body': 'ssss' });
+      }
     }
+
 
     navigator.serviceWorker.addEventListener('message', (event) => {
       console.log(11111)
