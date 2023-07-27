@@ -10,22 +10,35 @@ export default function Home() {
 
 
   useEffect(() => {
-    onMessageListener()
-      .then((payload: any) => {
-        alert(1)
-        setNotification({
-          title: payload.notification.title,
-          body: payload.notification.body,
-        });
-      })
-      .catch((err) => console.log("failed: ", err));
+    // onMessageListener()
+    //   .then((payload: any) => {
+    //     alert(1)
+    //     setNotification({
+    //       title: payload.notification.title,
+    //       body: payload.notification.body,
+    //     });
+    //   })
+    //   .catch((err) => console.log("failed: ", err));
     
       navigator.serviceWorker.addEventListener('message', (event) => {
+        console.log(11111)
         setNotification({
           title: event.data.notification.title,
           body: event.data.notification.body,
         });
+        if ('Notification' in window && Notification.permission === 'granted' && event) {
+          var notification = new Notification(event.data.notification.title, {
+            body: event.data.notification.body
+          });
+        
+          // You can also handle click events on the notification.
+          notification.onclick = function () {
+            // Code to run when the user clicks on the notification.
+          };
+        }
       });
+
+    
     
   })
 
