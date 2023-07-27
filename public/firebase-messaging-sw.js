@@ -32,3 +32,8 @@ messaging.onBackgroundMessage(function (payload) {
   console.log("Received background message ", payload);
   // self.registration.showNotification(notificationTitle, notificationOptions);
 });
+
+self.addEventListener("push", async function(e){
+  console.log(e)
+  await self.registration.showNotification(e.data.notification.title, e.data.notification.data);
+});
