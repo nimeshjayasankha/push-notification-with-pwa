@@ -10,43 +10,31 @@ export default function Home() {
 
 
   useEffect(() => {
-    // onMessageListener()
-    //   .then((payload: any) => {
-    //     alert(1)
-    //     setNotification({
-    //       title: payload.notification.title,
-    //       body: payload.notification.body,
-    //     });
-    //   })
-    //   .catch((err) => console.log("failed: ", err));
-  
-    if ('serviceWorker' in navigator && 'firebase-messaging-sw.js' in window) {
-      navigator.serviceWorker.ready.then((registration) => {
-        registration.pushManager
-          .subscribe({
-            userVisibleOnly: true,
-          })
-          .then((subscription) => {
-            // Send the subscription information to your server
-            // Your server should store this information to send future notifications
-          })
-          .catch((error) => {
-            console.error('Error subscribing to push notifications:', error);
-          });
-      });
-    }
-    
+    onMessageListener()
+      .then((payload: any) => {
+        setNotification({
+          title: payload.notification.title,
+          body: payload.notification.body,
+        });
+      })
+      .catch((err) => console.log("failed: ", err));
 
-    navigator.serviceWorker.addEventListener('message', (event) => {
-      console.log(11111)
-      setNotification({
-        title: event.data.notification.title,
-        body: event.data.notification.body,
-      });
-
-    });
-
-
+    // if ('serviceWorker' in navigator && 'firebase-messaging-sw.js' in window) {
+    //   navigator.serviceWorker.ready.then((registration) => {
+    //     registration.pushManager
+    //       .subscribe({
+    //         userVisibleOnly: true,
+    //       })
+    //       .then((subscription) => {
+    //         console.log(subscription)
+    //         // Send the subscription information to your server
+    //         // Your server should store this information to send future notifications
+    //       })
+    //       .catch((error) => {
+    //         console.error('Error subscribing to push notifications:', error);
+    //       });
+    //   });
+    // }
 
   })
 
