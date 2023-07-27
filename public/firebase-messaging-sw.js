@@ -33,18 +33,18 @@ messaging.onBackgroundMessage(function (payload) {
 });
 
 
-// self.addEventListener('push', (event) => {
-//   console.log('event',event)
-//   if (event.data) {
+self.addEventListener('push', (event) => {
+  console.log('event',event)
+  if (event.data) {
    
-//     const data = event.data.json();
-//     const title = data.title || 'Notification';
-//     const options = {
-//       body: data.body || '',
-//       icon: data.icon || '/path/to/icon.png',
-//     };
+    const data = event.data.json();
+    const title = data.title || 'Notificationssssss';
+    const options = {
+      body: data.body || '',
+      icon: data.icon || '/path/to/icon.png',
+    };
 
-//     event.waitUntil(self.registration.showNotification(title, options));
-//   }
-// });
+    event.waitUntil(self.registration.showNotification(title, options));
+  }
+});
 
